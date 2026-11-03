@@ -1,0 +1,122 @@
+{
+  "page": {
+    "position_cm": [{"uniform": [-1.5, 1.5]}, {"uniform": [-1.5, 1.5]}],
+    "rotation_deg": {"uniform": [-10, 10]}
+  },
+  "deform": {
+    "crumple": {
+      "mode": "scan",
+      "scan": {
+        "directory": "@assets/ambientcg/Paper003",
+        "tile_cm": {"uniform": [16, 30]}
+      },
+      "waviness_cm": {"uniform": [0.0, 0.4]},
+      "strength": {"uniform": [0.5, 1.2]}
+    },
+    "curl": {
+      "x_curvature": {"uniform": [-0.012, 0.012]},
+      "y_curvature": {"uniform": [-0.012, 0.012]}
+    },
+    "edge_lift_cm": [
+      {"uniform": [0.0, 0.45]},
+      {"uniform": [0.0, 0.45]},
+      {"uniform": [0.0, 0.45]},
+      {"uniform": [0.0, 0.45]}
+    ],
+    "folds": {
+      "repeat": {"randint": [0, 2]},
+      "item": {
+        "position": [0.5, {"choice": [0.333, 0.5, 0.667]}],
+        "direction_deg": {"choice": [0, 180]},
+        "angle_deg": {"uniform": [-20, 20]}
+      }
+    }
+  },
+  "light": {
+    "elevation_deg": {"uniform": [28, 45]},
+    "azimuth_deg": {"uniform": [115.56, 223.56]},
+    "distance_cm": {"uniform": [59.05, 99.55]},
+    "size_cm": {"uniform": [1, 6]},
+    "intensity": {"uniform": [0.8, 1.1]},
+    "color_temp_k": {"uniform": [3000, 6500]},
+    "ambient": {"uniform": [0.12, 0.2]}
+  },
+  "background": {
+    "images": "@assets/polyhaven/textures",
+    "zoom": {"uniform": [1.0, 2.0]},
+    "center": [{"uniform": [0.3, 0.7]}, {"uniform": [0.3, 0.7]}],
+    "quarter_turns": {"randint": [0, 3]},
+    "flip": {"choice": [false, true]},
+    "brightness": {"uniform": [0.25, 0.6]},
+    "saturation": {"uniform": [0.6, 1.1]},
+    "blur_px": {"choice": [0.0, {"uniform": [0.5, 2.0]}], "weights": [0.7, 0.3]}
+  },
+  "camera": {
+    "position_cm": [
+      {"uniform": [-5, 5]},
+      {"uniform": [-5.800000190734863, 5.199999809265137]},
+      {"uniform": [26.100000381469727, 30.100000381469727]}
+    ],
+    "target_cm": [{"uniform": [-2, 2]}, {"uniform": [-2, 2]}, 0],
+    "roll_deg": {"uniform": [-8, 8]},
+    "focal_mm": {"uniform": [26.0, 26.0]},
+    "frame_coverage": [0.3, 0.9]
+  },
+  "fx": {
+    "white_balance": {"uniform": [0.5, 0.9]},
+    "exposure_ev": {"uniform": [-0.4, 0.2]},
+    "defocus": {
+      "strength_px": {"uniform": [0.5, 2.5]},
+      "focus": [{"uniform": [0.3, 0.7]}, {"uniform": [0.3, 0.7]}]
+    },
+    "motion_blur": {
+      "enabled": {"choice": [false, true], "weights": [0.8, 0.2]},
+      "length_px": {"uniform": [1, 3]},
+      "angle_deg": {"uniform": [0, 180]}
+    },
+    "vignette": {"uniform": [0.1, 0.4]},
+    "noise": {
+      "shot": {"uniform": [0.0005, 0.004]},
+      "read": {"uniform": [0.0002, 0.0015]},
+      "enabled": false
+    },
+    "sharpen": {"amount": {"uniform": [0.2, 0.7]}},
+    "quality": 0.82,
+    "tonemap": "clip"
+  },
+  "output": {"jpeg_quality": {"randint": [70, 95]}, "format": "png"},
+  "desk": {
+    "enabled": true,
+    "surface": ["@assets/polyhaven/desks", "@assets/desks_plain"],
+    "texture_rotation_deg": {"choice": [0, 90]},
+    "items": {
+      "repeat": {"randint": [2, 4]},
+      "item": {
+        "kind": {
+          "choice": ["keyboard", "mousepad", "phone", "mug", "pen", "pencil", "sticky_notes", "paper"],
+          "weights": [0.22, 0.12, 0.13, 0.11, 0.11, 0.09, 0.11, 0.11]
+        },
+        "side": {"choice": ["left", "right", "top", "bottom"]},
+        "along": {"uniform": [0.1, 0.9]},
+        "gap_cm": {"uniform": [0.5, 5.0]},
+        "rotation_deg": {"normal": [0, 8], "clip": [-25, 25]}
+      }
+    }
+  },
+  "printer": {
+    "ink_bleed": {"uniform": [0.0, 0.15]},
+    "ghost": {"uniform": [0.0, 0.075]},
+    "toner_streaks": {"randint": [0, 1]},
+    "toner_specks": {"randint": [0, 300]}
+  },
+  "scanner": {
+    "dpi": {"randint": [121, 278]},
+    "skew_deg": {"uniform": [-1.5, 1.5]},
+    "blur_px": {"uniform": [0.3, 0.9]},
+    "bold": {"uniform": [0.0, 0.15]},
+    "dark_edges": [0.0097, 0.0097, 0.0, 0.0],
+    "noise": 0.0,
+    "dust": {"randint": [0, 30]}
+  },
+  "mode": {"choice": ["photo", "scan"], "weights": [0.7, 0.3]}
+}

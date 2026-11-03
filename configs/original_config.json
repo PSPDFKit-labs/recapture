@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "seed": 0,
+  "page": {
+    "size_cm": [21.0, 29.7],
+    "position_cm": [{"uniform": [-1.5, 1.5]}, {"uniform": [-1.5, 1.5]}],
+    "rotation_deg": {"uniform": [-10, 10]}
+  },
+  "deform": {
+    "crumple": {
+      "mode": {"choice": ["scan", "procedural"], "weights": [0.7, 0.3]},
+      "strength": {"uniform": [0.5, 1.8]},
+      "scan": {"directory": "@assets/ambientcg", "tile_cm": {"uniform": [16, 30]}},
+      "waviness_cm": {"uniform": [0.0, 0.4]}
+    },
+    "folds": {
+      "repeat": {"choice": [0, 1, 2], "weights": [0.6, 0.25, 0.15]},
+      "item": {
+        "position": [0.5, {"choice": [0.333, 0.5, 0.667]}],
+        "direction_deg": {"choice": [0, 180]},
+        "angle_deg": {"uniform": [-20, 20]}
+      }
+    },
+    "curl": {
+      "x_curvature": {"uniform": [-0.015, 0.015]},
+      "y_curvature": {"uniform": [-0.008, 0.008]}
+    },
+    "edge_lift_cm": [{"uniform": [0, 1.2]}, {"uniform": [0, 0.8]}, {"uniform": [0, 1.2]}, {"uniform": [0, 0.8]}]
+  },
+  "light": {
+    "elevation_deg": {"uniform": [12, 40]},
+    "azimuth_deg": {"uniform": [0, 360]},
+    "distance_cm": {"uniform": [40, 90]},
+    "size_cm": {"uniform": [1, 6]},
+    "intensity": {"uniform": [0.8, 1.1]},
+    "color_temp_k": {"uniform": [3000, 6500]},
+    "ambient": {"uniform": [0.08, 0.18]}
+  },
+  "occluders": {
+    "repeat": {"choice": [0, 1], "weights": [0.75, 0.25]},
+    "item": {
+      "shape": {"choice": ["hand_phone", "arm", "phone", "blob"]},
+      "target": [{"uniform": [0.2, 0.8]}, {"uniform": [0.3, 0.8]}],
+      "height_cm": {"uniform": [10, 30]},
+      "rotation_offset_deg": {"uniform": [-40, 40]}
+    }
+  },
+  "background": {
+    "images": "@assets/polyhaven/textures",
+    "zoom": {"uniform": [1.0, 2.0]},
+    "center": [{"uniform": [0.3, 0.7]}, {"uniform": [0.3, 0.7]}],
+    "quarter_turns": {"randint": [0, 3]},
+    "flip": {"choice": [false, true]},
+    "brightness": {"uniform": [0.25, 0.6]},
+    "saturation": {"uniform": [0.6, 1.1]},
+    "blur_px": {"choice": [0.0, {"uniform": [0.5, 2.0]}], "weights": [0.7, 0.3]}
+  },
+  "camera": {
+    "position_cm": [{"uniform": [-8, 8]}, {"uniform": [-18, -4]}, {"uniform": [28, 40]}],
+    "target_cm": [{"uniform": [-2, 2]}, {"uniform": [-2, 2]}, 0],
+    "roll_deg": {"uniform": [-8, 8]},
+    "focal_mm": 26,
+    "output_px": [1536, 2048],
+    "frame_coverage": [0.3, 0.9]
+  },
+  "fx": {
+    "white_balance": {"uniform": [0.5, 0.9]},
+    "exposure_ev": {"uniform": [-0.4, 0.2]},
+    "defocus": {
+      "strength_px": {"uniform": [0.5, 2.5]},
+      "focus": [{"uniform": [0.3, 0.7]}, {"uniform": [0.3, 0.7]}]
+    },
+    "motion_blur": {
+      "enabled": {"choice": [false, true], "weights": [0.8, 0.2]},
+      "length_px": {"uniform": [1, 3]},
+      "angle_deg": {"uniform": [0, 180]}
+    },
+    "vignette": {"uniform": [0.1, 0.4]},
+    "noise": {"shot": {"uniform": [0.0005, 0.004]}, "read": {"uniform": [0.0002, 0.0015]}},
+    "sharpen": {"amount": {"uniform": [0.2, 0.7]}}
+  },
+  "output": {"format": "jpg", "jpeg_quality": {"randint": [70, 95]}},
+  "desk": {
+    "enabled": true,
+    "surface": "@assets/polyhaven/desks",
+    "texture_rotation_deg": {"choice": [0, 90]},
+    "items": {
+      "repeat": {"choice": [0, 1, 2, 3], "weights": [0.15, 0.35, 0.35, 0.15]},
+      "item": {
+        "kind": {"choice": ["keyboard", "mousepad", "pen", "paper"], "weights": [0.35, 0.25, 0.25, 0.15]},
+        "side": {"choice": ["left", "right", "top", "bottom"]},
+        "along": {"uniform": [0.1, 0.9]},
+        "gap_cm": {"uniform": [0.5, 5.0]},
+        "rotation_deg": {"normal": [0, 8], "clip": [-25, 25]}
+      }
+    }
+  }
+}

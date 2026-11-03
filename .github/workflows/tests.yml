@@ -1,0 +1,77 @@
+name: tests
+
+# Pushes to main, and every pull request (a pull-request branch would otherwise run twice).
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+# A new push to the same branch or pull request stops the run before it.
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+
+      # Photo mode needs OpenGL 3.3. The runner has no GPU and no display, so
+      # create_context() in render/renderer.py picks EGL, and Mesa's llvmpipe
+      # draws on the CPU. glcontext loads libEGL.so.1 and libGL.so.1.
+      - name: Install Mesa (EGL, llvmpipe)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libegl1 libgl1 libegl-mesa0 libgl1-mesa-dri
+
+      - uses: astral-sh/setup-uv@v7
+
+      - name: Install Recapture
+        run: |
+          uv venv .venv --python 3.12
+          uv pip install --python .venv/bin/python -e '.[dev,editor]'
+
+      # The CC0 assets (about 105 MB) go to assets/ in the clone, where the
+      # tests and configs/ expect them. The cache key changes when the asset
+      # list changes; an older cache is restored and only new files download.
+      - name: Restore assets
+        id: assets
+        uses: actions/cache/restore@v6
+        with:
+          path: assets
+          key: assets-${{ hashFiles('src/recapture/assets.py') }}
+          restore-keys: assets-
+
+      - name: Fetch assets
+        # Files already there are skipped. One retry, as the asset sites time out now and then.
+        run: .venv/bin/recapture fetch-assets --yes || .venv/bin/recapture fetch-assets --yes
+
+      # Saved here, not at the end of the job, so a test failure does not
+      # throw the download away.
+      - name: Save assets
+        if: steps.assets.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6
+        with:
+          path: assets
+          key: assets-${{ hashFiles('src/recapture/assets.py') }}
+
+      # The GL tests skip when no context can be made. Fail here instead, so
+      # a broken GL setup cannot pass as a green run.
+      - name: Check the OpenGL context
+        run: >-
+          .venv/bin/python -c "from recapture.render.renderer import create_context;
+          ctx = create_context(); print(ctx.info['GL_RENDERER'], ctx.version_code)"
+
+      # Deselected: on llvmpipe the GPU and numpy camera effects differ a little
+      # more than the test allows for the desk-with-keyboard scene. The test
+      # also fails on unchanged main there; it passes on real GPUs.
+      # The editor window tests (test_editor_gizmo.py) skip, as there is no display.
+      - name: Run tests
+        run: >-
+          .venv/bin/pytest -rs
+          --deselect "tests/test_fx_gpu.py::test_gpu_effects_match_numpy_without_noise[extra1]"

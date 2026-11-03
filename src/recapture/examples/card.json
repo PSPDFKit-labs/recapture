@@ -1,0 +1,490 @@
+{
+  "mode": "photo",
+  "version": 1,
+  "seed": 0,
+  "page": {
+    "size_cm": [
+      8.56,
+      5.4
+    ],
+    "position_cm": [
+      {
+        "uniform": [
+          -1.5,
+          1.5
+        ]
+      },
+      {
+        "uniform": [
+          -1.5,
+          1.5
+        ]
+      }
+    ],
+    "rotation_deg": {
+      "uniform": [
+        -10,
+        10
+      ]
+    },
+    "lift_cm": 0.076
+  },
+  "deform": {
+    "crumple": {
+      "mode": "scan",
+      "strength": 0.0,
+      "scan": {
+        "directory": "@assets/ambientcg/Paper003",
+        "tile_cm": {
+          "uniform": [
+            16,
+            30
+          ]
+        }
+      },
+      "waviness_cm": 0.0
+    },
+    "folds": [],
+    "curl": {
+      "x_curvature": {
+        "uniform": [
+          -0.004,
+          0.004
+        ]
+      },
+      "y_curvature": {
+        "uniform": [
+          -0.004,
+          0.004
+        ]
+      }
+    },
+    "edge_lift_cm": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "light": {
+    "elevation_deg": {
+      "uniform": [
+        28,
+        45
+      ]
+    },
+    "azimuth_deg": {
+      "uniform": [
+        115.56,
+        223.56
+      ]
+    },
+    "distance_cm": {
+      "uniform": [
+        59.05,
+        99.55
+      ]
+    },
+    "size_cm": {
+      "uniform": [
+        1,
+        6
+      ]
+    },
+    "intensity": {
+      "uniform": [
+        0.8,
+        1.1
+      ]
+    },
+    "color_temp_k": {
+      "uniform": [
+        3000,
+        6500
+      ]
+    },
+    "ambient": {
+      "uniform": [
+        0.12,
+        0.2
+      ]
+    }
+  },
+  "occluders": [],
+  "background": {
+    "images": "@assets/polyhaven/textures",
+    "zoom": {
+      "uniform": [
+        1.0,
+        2.0
+      ]
+    },
+    "center": [
+      {
+        "uniform": [
+          0.3,
+          0.7
+        ]
+      },
+      {
+        "uniform": [
+          0.3,
+          0.7
+        ]
+      }
+    ],
+    "quarter_turns": {
+      "randint": [
+        0,
+        3
+      ]
+    },
+    "flip": {
+      "choice": [
+        false,
+        true
+      ]
+    },
+    "brightness": {
+      "uniform": [
+        0.25,
+        0.6
+      ]
+    },
+    "saturation": {
+      "uniform": [
+        0.6,
+        1.1
+      ]
+    },
+    "blur_px": {
+      "choice": [
+        0.0,
+        {
+          "uniform": [
+            0.5,
+            2.0
+          ]
+        }
+      ],
+      "weights": [
+        0.7,
+        0.3
+      ]
+    }
+  },
+  "camera": {
+    "position_cm": [
+      {
+        "uniform": [
+          -5,
+          5
+        ]
+      },
+      {
+        "uniform": [
+          -5.8,
+          5.2
+        ]
+      },
+      {
+        "uniform": [
+          26.1,
+          30.1
+        ]
+      }
+    ],
+    "target_cm": [
+      {
+        "uniform": [
+          -2,
+          2
+        ]
+      },
+      {
+        "uniform": [
+          -2,
+          2
+        ]
+      },
+      0
+    ],
+    "roll_deg": {
+      "uniform": [
+        -8,
+        8
+      ]
+    },
+    "focal_mm": 26.0,
+    "output_px": [
+      2048,
+      1536
+    ],
+    "fit_page": true
+  },
+  "fx": {
+    "white_balance": {
+      "uniform": [
+        0.5,
+        0.9
+      ]
+    },
+    "exposure_ev": {
+      "uniform": [
+        -0.4,
+        0.2
+      ]
+    },
+    "defocus": {
+      "strength_px": {
+        "uniform": [
+          0.5,
+          2.5
+        ]
+      },
+      "focus": [
+        {
+          "uniform": [
+            0.3,
+            0.7
+          ]
+        },
+        {
+          "uniform": [
+            0.3,
+            0.7
+          ]
+        }
+      ]
+    },
+    "motion_blur": {
+      "enabled": {
+        "choice": [
+          false,
+          true
+        ],
+        "weights": [
+          0.8,
+          0.2
+        ]
+      },
+      "length_px": {
+        "uniform": [
+          1,
+          3
+        ]
+      },
+      "angle_deg": {
+        "uniform": [
+          0,
+          180
+        ]
+      }
+    },
+    "vignette": {
+      "uniform": [
+        0.1,
+        0.4
+      ]
+    },
+    "noise": {
+      "shot": {
+        "uniform": [
+          0.0005,
+          0.004
+        ]
+      },
+      "read": {
+        "uniform": [
+          0.0002,
+          0.0015
+        ]
+      },
+      "enabled": true
+    },
+    "sharpen": {
+      "amount": {
+        "uniform": [
+          0.2,
+          0.7
+        ]
+      }
+    },
+    "quality": 0.82,
+    "tonemap": "clip"
+  },
+  "output": {
+    "format": "jpg",
+    "jpeg_quality": {
+      "randint": [
+        70,
+        95
+      ]
+    }
+  },
+  "desk": {
+    "enabled": true,
+    "surface": [
+      "@assets/polyhaven/desks",
+      "@assets/desks_plain"
+    ],
+    "texture_rotation_deg": {
+      "choice": [
+        0,
+        90
+      ]
+    },
+    "items": {
+      "repeat": {
+        "randint": [
+          2,
+          4
+        ]
+      },
+      "item": {
+        "kind": {
+          "choice": [
+            "keyboard",
+            "mousepad",
+            "phone",
+            "mug",
+            "pen",
+            "pencil",
+            "sticky_notes",
+            "paper"
+          ],
+          "weights": [
+            0.22,
+            0.12,
+            0.13,
+            0.11,
+            0.11,
+            0.09,
+            0.11,
+            0.11
+          ]
+        },
+        "side": {
+          "choice": [
+            "left",
+            "right",
+            "top",
+            "bottom"
+          ]
+        },
+        "along": {
+          "uniform": [
+            0.1,
+            0.9
+          ]
+        },
+        "gap_cm": {
+          "uniform": [
+            0.5,
+            5.0
+          ]
+        },
+        "rotation_deg": {
+          "normal": [
+            0,
+            8
+          ],
+          "clip": [
+            -25,
+            25
+          ]
+        }
+      }
+    }
+  },
+  "material": {
+    "tint": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "roughness": {
+      "uniform": [
+        0.1,
+        0.25
+      ]
+    },
+    "specular": {
+      "uniform": [
+        0.04,
+        0.06
+      ]
+    },
+    "grain": 0.0,
+    "corner_radius_cm": 0.318,
+    "glare": {
+      "strength": {
+        "uniform": [
+          3,
+          15
+        ]
+      },
+      "elevation_deg": {
+        "uniform": [
+          55,
+          88
+        ]
+      },
+      "azimuth_deg": {
+        "uniform": [
+          0,
+          360
+        ]
+      },
+      "size_deg": {
+        "uniform": [
+          5,
+          12
+        ]
+      },
+      "softness": {
+        "uniform": [
+          0.15,
+          0.45
+        ]
+      },
+      "shape": "panel",
+      "aspect": {
+        "uniform": [
+          1.2,
+          3.0
+        ]
+      },
+      "rotation_deg": {
+        "uniform": [
+          0,
+          180
+        ]
+      },
+      "waviness": {
+        "uniform": [
+          0.3,
+          1.0
+        ]
+      }
+    },
+    "hologram": {
+      "uniform": [
+        0.1,
+        0.35
+      ]
+    },
+    "room_reflection": {
+      "uniform": [
+        0.2,
+        0.6
+      ]
+    },
+    "wear": {
+      "uniform": [
+        0.3,
+        1.0
+      ]
+    }
+  }
+}

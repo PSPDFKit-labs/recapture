@@ -1,0 +1,12 @@
+{
+  "name": "recapture",
+  "description": "Recapture: synthetic phone photos and scans of documents, with exact layout labels",
+  "owner": {"name": "Nutrient"},
+  "plugins": [
+    {
+      "name": "recapture",
+      "source": ".",
+      "description": "The recapture skill: install the CLI, write a config, preview, render and export a dataset"
+    }
+  ]
+}

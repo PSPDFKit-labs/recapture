@@ -1,0 +1,8 @@
+{
+  "name": "recapture",
+  "version": "0.1.0",
+  "description": "Turn clean document images into realistic phone photos and flatbed scans with exact layout labels, for layout-detection training data.",
+  "author": {"name": "Nutrient"},
+  "repository": "https://github.com/PSPDFKit-labs/recapture",
+  "keywords": ["documents", "synthetic data", "layout detection", "training data"]
+}

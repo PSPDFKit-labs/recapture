@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=77"]  # 77 reads the SPDX license string and license-files (PEP 639)
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "recapture"
+version = "0.1.0"
+description = "Turn clean page images into phone photos and flatbed scans, with exact layout labels."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{name = "Nutrient"}]
+keywords = [
+    "document images",
+    "synthetic data",
+    "data augmentation",
+    "layout detection",
+    "training data",
+    "document scans",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Image Processing",
+]
+dependencies = [
+    "moderngl>=5.10",
+    "numpy>=1.26",
+    "pillow>=10",
+]
+
+[project.optional-dependencies]
+editor = ["imgui-bundle>=1.92"]
+dev = ["pytest>=8"]
+
+[project.urls]
+Homepage = "https://github.com/PSPDFKit-labs/recapture"
+Repository = "https://github.com/PSPDFKit-labs/recapture"
+Issues = "https://github.com/PSPDFKit-labs/recapture/issues"
+Changelog = "https://github.com/PSPDFKit-labs/recapture/blob/main/CHANGELOG.md"
+
+[project.scripts]
+recapture = "recapture.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+recapture = ["examples/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
