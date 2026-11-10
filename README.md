@@ -1,5 +1,11 @@
 # Recapture
 
+[![tests](https://github.com/PSPDFKit-labs/recapture/actions/workflows/tests.yml/badge.svg)](https://github.com/PSPDFKit-labs/recapture/actions/workflows/tests.yml)
+[![python 3.12+](https://img.shields.io/badge/python-3.12%2B-3776AB?logo=python&logoColor=white)](pyproject.toml)
+[![built with uv](https://img.shields.io/badge/built%20with-uv-DE5FE9?logo=uv&logoColor=white)](https://docs.astral.sh/uv/)
+[![license Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-4c1)](LICENSE)
+[![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-D97757?logo=claude&logoColor=white)](#install)
+
 ![A clean page with layout boxes, rendered as a phone photo and as a scan, with the boxes moved into each image](docs/header.jpg)
 
 Recapture turns clean document images into realistic phone photos and scans. It moves each page's layout boxes into every new image, so the output is ready-made training data for layout detection.
