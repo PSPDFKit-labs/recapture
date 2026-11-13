@@ -74,15 +74,23 @@ The repo is also a Claude Code plugin with a `recapture` skill. On first use the
 Then ask something like "Degrade the pages in `docs/`, 30 % scans, COCO export."
 
 - Update with `claude plugin update recapture@recapture`, or turn on auto-update under `/plugin`, Marketplaces.
-**Codex, pi and other agents**
+
+**Codex**
+
+```bash
+codex plugin marketplace add PSPDFKit-labs/recapture
+codex plugin add recapture@recapture
+```
+
+Start a new Codex session, then ask the same way. Update with `codex plugin marketplace upgrade recapture`.
+
+**pi and other agents**
 
 They read the same skill format, the [Agent Skills](https://agentskills.io) standard. Clone the repo and make `skills/recapture/` visible to the agent. For pi, link it into `~/.agents/skills/`:
 
 ```bash
 ln -s "$PWD/skills/recapture" ~/.agents/skills/recapture
 ```
-
-For Codex, use the skills folder its docs name.
 
 **Any agent, without the skill**
 
