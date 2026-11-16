@@ -13,6 +13,8 @@ Recapture turns clean document images into realistic phone photos and scans. It 
 - **Photo mode** crumples the page as a 3D mesh, puts it on a desk, lights it and photographs it with a virtual phone.
 - **Scan mode** adds printer marks and runs the page through a virtual flatbed scanner.
 
+> Recapture is an open-source project by [Nutrient](https://www.nutrient.io). It is not an officially supported Nutrient product.
+
 [GLOSSARY.md](GLOSSARY.md) defines the project's terms. Design notes and the reasons behind key choices live in [docs/design.md](docs/design.md). [AGENTS.md](AGENTS.md) is the guide for coding agents that work on the repo.
 
 ## Quick start
@@ -298,4 +300,4 @@ for v in range(3):
 
 ## License
 
-Recapture is open source under the [Apache License 2.0](LICENSE). See [NOTICE](NOTICE) for third-party credits.
+Recapture is open source under the [Apache License 2.0](LICENSE), by [Nutrient](https://www.nutrient.io). It is not an officially supported Nutrient product. See [NOTICE](NOTICE) for third-party credits.
