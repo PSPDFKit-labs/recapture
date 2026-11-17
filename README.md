@@ -5,13 +5,9 @@
 [![built with uv](https://img.shields.io/badge/built%20with-uv-DE5FE9?logo=uv&logoColor=white)](https://docs.astral.sh/uv/)
 [![license Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-4c1)](LICENSE)
 [![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-D97757?logo=claude&logoColor=white)](#install)
+[![by Nutrient](https://img.shields.io/badge/by-Nutrient-1A1414?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNDAiIGhlaWdodD0iMTY5IiBmaWxsPSIjRkZGRkZGIiB2aWV3Qm94PSIwIDAgMjQwIDE2OSI%2BCiAgPHBhdGggZD0iTTIwIDEwNC4yODdjLTExLjA1IDAtMjAtOC45NS0yMC0yMHM4Ljk1LTIwIDIwLTIwIDIwIDguOTUgMjAgMjAtOC45NSAyMC0yMCAyMFptMjAwLTQwYy0xMS4wNSAwLTIwIDguOTUtMjAgMjBzOC45NSAyMCAyMCAyMCAyMC04Ljk1IDIwLTIwLTguOTUtMjAtMjAtMjBabS0xODkuNDYgNjguOTZjLTguNDYgNy4xLTkuNTcgMTkuNzItMi40NyAyOC4xOHMxOS43MiA5LjU3IDI4LjE4IDIuNDcgOS41Ny0xOS43MiAyLjQ3LTI4LjE4LTE5LjcyLTkuNTctMjguMTgtMi40N1ptMTc4LjkyLTk3LjkyYzguNDYtNy4xIDkuNTctMTkuNzIgMi40Ny0yOC4xOHMtMTkuNzItOS41Ny0yOC4xOC0yLjQ3LTkuNTcgMTkuNzItMi40NyAyOC4xOCAxOS43MiA5LjU3IDI4LjE4IDIuNDdaTTU2LjI1IDQuNjg3Yy04LjQ2LTcuMS0yMS4wOC02LTI4LjE4IDIuNDctNy4xIDguNDctNiAyMS4wOCAyLjQ3IDI4LjE4IDguNDcgNy4xIDIxLjA4IDYgMjguMTgtMi40NyA3LjEtOC40NyA2LTIxLjA4LTIuNDctMjguMThabTE1My4yMSAxMjguNTZjLTguNDYtNy4xLTIxLjA4LTYtMjguMTggMi40Ny03LjEgOC40Ni02IDIxLjA4IDIuNDcgMjguMTggOC40NiA3LjEgMjEuMDggNiAyOC4xOC0yLjQ3IDcuMS04LjQ2IDYtMjEuMDgtMi40Ny0yOC4xOFptLTUxLjA3LTQyLjg2Yy04LjQ2LTcuMS0yMS4wOC02LTI4LjE4IDIuNDctNy4xIDguNDctNiAyMS4wOCAyLjQ3IDI4LjE4IDguNDcgNy4xIDIxLjA4IDYgMjguMTgtMi40NyA3LjEtOC40NyA2LTIxLjA4LTIuNDctMjguMThabS01MS4wNy00Mi44NWMtOC40Ni03LjEtMjEuMDgtNi0yOC4xOCAyLjQ3LTcuMSA4LjQ3LTYgMjEuMDggMi40NyAyOC4xOCA4LjQ3IDcuMSAyMS4wOCA2IDI4LjE4LTIuNDcgNy4xLTguNDcgNi0yMS4wOC0yLjQ3LTI4LjE4WiIvPgo8L3N2Zz4K)](https://www.nutrient.io)
 
-<a href="https://www.nutrient.io">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/nutrient-logo-dark.svg">
-    <img alt="Nutrient" src="docs/nutrient-logo-light.svg" height="28">
-  </picture>
-</a>
+![Nutrient](docs/nutrient-logo-light.svg#gh-light-mode-only)![Nutrient](docs/nutrient-logo-dark.svg#gh-dark-mode-only)
 
 **An open-source project by [Nutrient](https://www.nutrient.io).** Need layout labels for your own documents? The [Nutrient Parse API](https://www.nutrient.io/guides/dws-data-extraction/parsing/) finds them, and Recapture reads its output as it is. New accounts can [try it for free](https://www.nutrient.io/api/pricing/). Recapture is not an officially supported Nutrient product.
 
