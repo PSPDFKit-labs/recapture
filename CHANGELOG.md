@@ -6,7 +6,7 @@ The same config, seed and version give the same image. A line under **Output cha
 
 ## [Unreleased]
 
-## [0.1.0] - 2026-11-10
+## [0.1.0] - 2026-11-17
 
 First public release, under the Apache License 2.0.
 
@@ -18,7 +18,8 @@ First public release, under the Apache License 2.0.
 - `background.enabled: false` gives a PNG that is transparent around the page.
 - Scan mode: printer marks (ink bleed, broken strokes, ghost, toner streaks and specks), then a virtual flatbed scanner (skew, blur, bold, noise, streaks, dust, dark edges, edge dots, and color, gray or black-and-white). Scans need no GPU.
 - Mix configs, whose mode is a choice between photo and scan.
-- Exact labels: each box's quad holds every pixel whose center shows the box. Box files in the simple format or the API format.
+- Exact labels: each box's quad holds every pixel whose center shows the box. Box files in the simple format or as a Nutrient Parse API response.
+- `recapture split-pages` cuts a Nutrient Parse API response for a whole document into one box file per page, named like the page images of `pdftoppm`.
 - The CLI: `render`, `preview`, `export` (COCO and YOLO-OBB, split by page), `init`, `edit`, `validate`, `defaults`, `sample` and `fetch-assets`. `render --recursive` seeds each page by its path inside the input folder.
 - The Python API: `Pipeline`, `Job`, `JobResult`, `job_seed`, `load_config`, `build_config`, `ConfigError` and `fetch_assets`, importable from `recapture`. The same config and seed give the same images as the CLI.
 - The `photo`, `scan`, `mix` and `card` example configs.

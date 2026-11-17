@@ -21,7 +21,7 @@ The class name of a box, such as `paragraph` or `Text`. In the API format it com
 _Avoid_: class, category, role
 
 **API format**:
-A response from the parse endpoint of Nutrient's DWS Data Extraction API (https://www.nutrient.io/guides/dws-data-extraction/parsing/), used as a box file as it is. Recapture reads its `output.elements`.
+A response from the Nutrient Parse API (https://www.nutrient.io/guides/dws-data-extraction/parsing/), used as a box file as it is. Recapture reads its `output.elements`.
 _Avoid_: document-analysis response
 
 ## Modes

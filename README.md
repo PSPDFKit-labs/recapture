@@ -6,14 +6,21 @@
 [![license Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-4c1)](LICENSE)
 [![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-D97757?logo=claude&logoColor=white)](#install)
 
+<a href="https://www.nutrient.io">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/nutrient-logo-dark.svg">
+    <img alt="Nutrient" src="docs/nutrient-logo-light.svg" height="28">
+  </picture>
+</a>
+
+**An open-source project by [Nutrient](https://www.nutrient.io).** Need layout labels for your own documents? The [Nutrient Parse API](https://www.nutrient.io/guides/dws-data-extraction/parsing/) finds them, and Recapture reads its output as it is. New accounts can [try it for free](https://www.nutrient.io/api/pricing/). Recapture is not an officially supported Nutrient product.
+
 ![A clean page with layout boxes, rendered as a phone photo and as a scan, with the boxes moved into each image](docs/header.jpg)
 
 Recapture turns clean document images into realistic phone photos and scans. It moves each page's layout boxes into every new image, so the output is ready-made training data for layout detection.
 
 - **Photo mode** crumples the page as a 3D mesh, puts it on a desk, lights it and photographs it with a virtual phone.
 - **Scan mode** adds printer marks and runs the page through a virtual flatbed scanner.
-
-> Recapture is an open-source project by [Nutrient](https://www.nutrient.io). It is not an officially supported Nutrient product.
 
 [GLOSSARY.md](GLOSSARY.md) defines the project's terms. Design notes and the reasons behind key choices live in [docs/design.md](docs/design.md). [AGENTS.md](AGENTS.md) is the guide for coding agents that work on the repo.
 
@@ -151,6 +158,9 @@ recapture fetch-assets        # download the assets
 
 ## Inputs
 
+> [!TIP]
+> To skip drawing boxes by hand, send your PDF to the [Nutrient Parse API](https://www.nutrient.io/guides/dws-data-extraction/parsing/). Recapture works with its response out of the box: [`split-pages`](#split-pages) cuts it into one box file per page. New accounts can [try it for free](https://www.nutrient.io/api/pricing/).
+
 Put a JSON file next to each page image with the same name, `invoice.png` and `invoice.json`. A page without one still renders, with no labels. Coordinates are pixels of that image, from the top-left corner.
 
 The simple format:
@@ -164,14 +174,22 @@ The simple format:
 
 A box needs `bbox` or `quad`. Other keys, such as `text`, are copied to the output.
 
-A response from the parse endpoint of Nutrient's [DWS Data Extraction API](https://www.nutrient.io/guides/dws-data-extraction/parsing/) also works as it is. Recapture reads its `output.elements`:
+A response from the [Nutrient Parse API](https://www.nutrient.io/guides/dws-data-extraction/parsing/) also works as it is. Recapture reads its `output.elements`:
 
 - `points` or `bounds` give the box. When both exist, `points` wins.
 - `role`, or else `type`, gives the label.
 - `type`, `role`, `text`, `readingOrder` and `confidence` are copied.
 - Coordinates scale to the image when the element's `page` size differs.
 
-One file holds one page.
+<a id="split-pages"></a>One box file holds one page, and a response holds the whole document. `split-pages` cuts it into one box file per page, named the way [`pdftoppm`](https://poppler.freedesktop.org) names page images, so the two line up:
+
+```bash
+recapture split-pages contract.json -o pages/
+pdftoppm -r 200 -png contract.pdf pages/contract
+recapture render -i pages/ -c my.json -o dataset/
+```
+
+`pages/` then holds `contract-1.png` with `contract-1.json`, and so on (`contract-01` from 10 pages on). Any resolution works; the boxes scale to the image. `pdftoppm` comes with Poppler (`brew install poppler`, `apt install poppler-utils`). With another tool, name each page image like its box file.
 
 ## Outputs
 

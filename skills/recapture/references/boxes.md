@@ -17,14 +17,21 @@ One JSON file next to each page image, same stem: `invoice.png` → `invoice.jso
 
 ## Document-analysis API response
 
-An object with `output.elements`, as the parse endpoint of Nutrient's [DWS Data Extraction API](https://www.nutrient.io/guides/dws-data-extraction/parsing/) returns it. Per element:
+An object with `output.elements`, as the [Nutrient Parse API](https://www.nutrient.io/guides/dws-data-extraction/parsing/) returns it. Per element:
 
 - `points` (4 `[x, y]` corners) or `bounds` (`{"x", "y", "width", "height"}`). When an element has both, `points` is used.
 - `role`, or else `type`, becomes the label.
 - `page.width` and `page.height`, when they differ from the image size, scale the coordinates to the image.
 - `type`, `role`, `text`, `readingOrder` and `confidence` are copied into the output boxes.
 
-All elements must come from one page: one image is one page.
+All elements must come from one page: one image is one page. A response for a whole document holds every page; cut it with:
+
+```bash
+recapture split-pages <response>.json -o <pages folder>
+pdftoppm -r 200 -png <document>.pdf <pages folder>/<response name>
+```
+
+`split-pages` writes `<name>-1.json`, `<name>-2.json`, … (`-01` from 10 pages on), the names `pdftoppm` gives the page images. `--name` changes the part before the number. Any resolution works. Without Poppler, render the pages with another tool and name each image like its box file.
 
 ## Output labels
 

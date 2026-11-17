@@ -11,7 +11,8 @@ A quad lists its corners as top-left, top-right, bottom-right, bottom-left.
 A document-analysis API response works too: an object with
 `output.elements`, each with 4 corner `points` (or `bounds`), an `id`, a
 `role` or `type` (the label), and `text`. Coordinates are scaled from the
-element's `page` size to the image size when they differ.
+element's `page` size to the image size when they differ. A response holds
+every page of a document; `split_api_pages` cuts it into one per page.
 """
 
 from __future__ import annotations
@@ -48,7 +49,7 @@ def load_boxes(path: str | Path, image_size: tuple[int, int] | None = None) -> l
         data = json.loads(path.read_text())
     except json.JSONDecodeError as e:
         raise BoxFileError(f"{path}: invalid JSON: {e}") from e
-    if isinstance(data, dict) and isinstance(data.get("output"), dict) and "elements" in data["output"]:
+    if is_api_response(data):
         return _api_elements(path, data["output"]["elements"], image_size)
     items = data.get("boxes") if isinstance(data, dict) else None
     if not isinstance(items, list):
@@ -79,7 +80,8 @@ def _api_elements(path: Path, elements: list, image_size: tuple[int, int] | None
     """Layout elements of a document-analysis API response, one box each."""
     pages = {e.get("page", {}).get("pageIndex", 0) for e in elements}
     if len(pages) > 1:
-        raise BoxFileError(f"{path}: elements from {len(pages)} pages; one image needs the elements of one page")
+        raise BoxFileError(f"{path}: elements from {len(pages)} pages; one image needs the elements of one page "
+                           "(`recapture split-pages` writes one box file per page)")
     boxes = []
     for n, e in enumerate(elements):
         where = f"{path}: output.elements[{n}]"
@@ -98,3 +100,32 @@ def _api_elements(path: Path, elements: list, image_size: tuple[int, int] | None
         extra = {k: e[k] for k in _API_KEEP if k in e}
         boxes.append(SourceBox(id=str(e.get("id", n)), label=str(label), quad=quad, extra=extra))
     return boxes
+
+
+def is_api_response(data: Any) -> bool:
+    return isinstance(data, dict) and isinstance(data.get("output"), dict) and "elements" in data["output"]
+
+
+def split_api_pages(data: dict[str, Any]) -> dict[int, dict[str, Any]]:
+    """Cut an API response into one response per page, keyed by page index (0 = first page).
+
+    Each part keeps the top-level elements of its page, in their order, so `load_boxes` reads it as a box file.
+    Pages without elements are left out."""
+    if not is_api_response(data):
+        raise BoxFileError("not an API response: it needs `output.elements`")
+    pages: dict[int, list] = {}
+    for n, e in enumerate(data["output"]["elements"]):
+        index = (e.get("page") or {}).get("pageIndex", 0)
+        if not isinstance(index, int) or index < 0:
+            raise BoxFileError(f"output.elements[{n}]: page.pageIndex must be an integer >= 0")
+        pages.setdefault(index, []).append(e)
+    return {i: {"output": {"elements": pages[i]}} for i in sorted(pages)}
+
+
+def api_page_size(part: dict[str, Any]) -> tuple[int, int] | None:
+    """The page size in pixels that the coordinates of one page's response refer to, when it says so."""
+    for e in part["output"]["elements"]:
+        page = e.get("page") or {}
+        if page.get("width") and page.get("height"):
+            return round(float(page["width"])), round(float(page["height"]))
+    return None

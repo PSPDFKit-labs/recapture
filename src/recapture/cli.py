@@ -57,6 +57,11 @@ def main(argv: list[str] | None = None) -> int:
     x.add_argument("--classes", nargs="+", help="class names in order (default: every label found, sorted)")
     x.add_argument("--link", action="store_true", help="hard-link the images instead of copying them")
 
+    sp = sub.add_parser("split-pages", help="cut a document's API response into one box file per page")
+    sp.add_argument("response", type=Path, help="the API response JSON of the whole document")
+    sp.add_argument("--out", "-o", required=True, type=Path, help="folder for the page box files")
+    sp.add_argument("--name", help="file name before the page number (default: the response's name)")
+
     i = sub.add_parser("init", help="write a starting config from an example")
     i.add_argument("config", type=Path, help="config file to write")
     i.add_argument("--from", dest="example", choices=EXAMPLES, default="mix",
@@ -112,6 +117,8 @@ def main(argv: list[str] | None = None) -> int:
                     print(f"warning: no {split} split: {docs} documents is too few for --{split} {part} "
                           "(the split counts whole documents)", file=sys.stderr)
             return 0
+        if args.cmd == "split-pages":
+            return _split_pages(args)
         if args.cmd == "init":
             return _init(args)
         if args.cmd == "fetch-assets":
@@ -158,6 +165,26 @@ def _preview(args) -> int:
         return 1
     seed = args.seed if args.seed is not None else int(cfg["seed"])
     preview(cfg, docs, max(1, args.count), args.out, seed)
+    return 0
+
+
+def _split_pages(args) -> int:
+    from .labels import api_page_size, split_api_pages
+
+    data = json.loads(args.response.read_text())
+    parts = split_api_pages(data)
+    # Name pages the way `pdftoppm -png doc.pdf <out>/<name>` does: <name>-1, or <name>-01 from 10 pages on.
+    count = max([(data.get("metrics") or {}).get("pagesProcessed") or 0, *(i + 1 for i in parts)])
+    name = args.name or args.response.stem
+    args.out.mkdir(parents=True, exist_ok=True)
+    for i, part in parts.items():
+        (args.out / f"{name}-{i + 1:0{len(str(count))}d}.json").write_text(json.dumps(part, indent=1))
+    print(f"wrote {len(parts)} box files for {count} pages into {args.out}. Render the pages next to them with:\n"
+          f"  pdftoppm -r 200 -png <document>.pdf '{args.out / name}'")
+    sizes = {s for s in map(api_page_size, parts.values()) if s}
+    if sizes:
+        print("Coordinates are for " + ", ".join(f"{w}x{h}" for w, h in sorted(sizes)) + " pages; any resolution "
+              "with that shape works.")
     return 0
 
 

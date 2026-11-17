@@ -22,7 +22,7 @@ The assets (textures and crumple scans) are checked in step 3: `recapture valida
 
 ## 2. Inputs
 
-The user gives a folder of page images (PNG or JPG, one page per image). Boxes come from a JSON file next to each image with the same stem (`page.png` → `page.json`); [`references/boxes.md`](references/boxes.md) has both accepted formats. A page with no box file still renders, with no labels.
+The user gives a folder of page images (PNG or JPG, one page per image). Boxes come from a JSON file next to each image with the same stem (`page.png` → `page.json`); [`references/boxes.md`](references/boxes.md) has both accepted formats. When the user has one API response for a whole multi-page document, run `recapture split-pages` first and render the PDF pages next to its box files (see that file). A page with no box file still renders, with no labels.
 
 Look at one box file of each kind: different formats, or different naming in the files, give different class names (`Text` from the API format next to `paragraph` from the simple format). Tell the user when the label names differ between files; they show up as separate classes in step 6.
 
